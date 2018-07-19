@@ -1,24 +1,34 @@
 ﻿using Fundacao.Models;
+using Fundacao.ViewModels.Commands;
 
 namespace Fundacao.ViewModels
 {
-    public class SapataViewModel
+    public class SapataViewModel 
     {
-        private SapataModel _sapata = new SapataModel();
+        private SapataModel _sapata;
+
+        public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
 
         public SapataModel Sapata
         {
             get { return _sapata; }
-            set
-            {
-                _sapata = value;
-            }
+            set { _sapata = value; }
         }
 
         public SapataViewModel()
         {
+            //Sapata = new SapataModel();
+            DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
 
-  
+        public void DimensionarSapata(SapataModel sapataUI)
+        {
+            Sapata.TensaoNormal = sapataUI.TensaoNormal;
+            Sapata.TensaoAdmissivelSolo = sapataUI.TensaoAdmissivelSolo;
+            Sapata.PilarMaiorLado = sapataUI.PilarMaiorLado;
+            Sapata.PilarMenorLado = sapataUI.PilarMenorLado;
+        }
     }
 }
+
+

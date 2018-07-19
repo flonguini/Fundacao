@@ -6,13 +6,14 @@
         xmlns:vm="clr-namespace:Fundacao.ViewModels"
         xmlns:local="clr-namespace:Fundacao"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="250" Width="500">
 
     <Window.Resources>
-        <vm:SapataViewModel x:Key="sapata" />
+        <vm:SapataViewModel x:Key="sapataVM" />
     </Window.Resources>
     
-    <Grid DataContext="{StaticResource sapata}">
+    <Grid DataContext="{StaticResource sapataVM}">
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
@@ -26,11 +27,14 @@
             <TextBlock Text="Tensao Normal"/>
             <TextBox Width="150" Text="{Binding Sapata.TensaoNormal}" />
             <TextBlock Text="Resistencia solo"/>
-            <TextBox Width="150" Text="{Binding Sapata.TensaoAdimissivelSolo}" />
-            <Button Content="Dimensionar" Margin="0 10 0 0"/>
+            <TextBox Width="150" Text="{Binding Sapata.TensaoAdmissivelSolo}" />
+            <Button Content="Dimensionar" 
+                    Margin="0 10 0 0" 
+                    Command="{Binding DimensionarSapataCommand, Source={StaticResource sapataVM}}"
+                    CommandParameter="{Binding Sapata}"/>
         </StackPanel>
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
             <TextBlock Text="Area de Suporte" />
             <TextBlock Text="{Binding Sapata.AreaSuporte}" />
             <TextBlock Text="Menor lado" />

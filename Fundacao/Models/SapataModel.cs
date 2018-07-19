@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Fundacao.Models
 {
@@ -25,31 +21,19 @@ namespace Fundacao.Models
         public double MenorLado
         {
             get { return DimensionarMenorLado(); }
-            set
-            {
-                _menorLado = value;
-                OnPropertyChanged();
-            }
+            set{ _menorLado = value; }
         }
 
        public double MaiorLado
         {
             get { return DimensionarMaiorLado(); }
-            set
-            {
-                _maiorLado = value;
-                OnPropertyChanged();
-            }
+            set{ _maiorLado = value; }
         }
 
         public double AreaSuporte
         {
             get { return DimensionarAreaSuporte();  }
-            set
-            {
-                _areaSuporte = value;
-                OnPropertyChanged();
-            }
+            set{ _areaSuporte = value; }
         }
 
         public double PilarMenorLado
@@ -78,7 +62,7 @@ namespace Fundacao.Models
             }
         }
 
-        public double TensaoAdimissivelSolo
+        public double TensaoAdmissivelSolo
         {
             get { return _tensaoAdmissivelSolo; }
             set
@@ -98,17 +82,19 @@ namespace Fundacao.Models
             {
                 _tensaoNormal = value;
                 OnPropertyChanged();
+                OnPropertyChanged("MenorLado");
+                OnPropertyChanged("MaiorLado");
+                OnPropertyChanged("AreaSuporte");
             }
         }
-        
-        #endregion
 
+        #endregion
 
         #region Methods
 
         private double DimensionarAreaSuporte()
         {
-            return 1.1 * TensaoNormal / TensaoAdimissivelSolo;
+            return 1.1 * TensaoNormal / TensaoAdmissivelSolo;
         }
 
         private double DimensionarMenorLado()
