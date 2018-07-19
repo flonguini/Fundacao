@@ -1,5 +1,4 @@
-﻿using Fundacao.Models;
-using System;
+﻿using System;
 using System.Windows.Input;
 
 namespace Fundacao.ViewModels.Commands
@@ -26,7 +25,7 @@ namespace Fundacao.ViewModels.Commands
 
         public void Execute(object parameter)
         {
-            SapataViewModel.DimensionarSapata((SapataModel)parameter);
+            SapataViewModel.DimensionarSapata();
         }
     }
 }

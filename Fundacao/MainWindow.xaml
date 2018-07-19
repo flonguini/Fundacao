@@ -21,13 +21,13 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="Menor lado pilar"/>
-            <TextBox Width="150" Text="{Binding Sapata.PilarMenorLado}"/>
+            <TextBox Width="150" Text="{Binding PilarMenorLado}"/>
             <TextBlock Text="Maior lado pilar"/>
-            <TextBox Width="150" Text="{Binding Sapata.PilarMaiorLado}" />
+            <TextBox Width="150" Text="{Binding PilarMaiorLado}" />
             <TextBlock Text="Tensao Normal"/>
-            <TextBox Width="150" Text="{Binding Sapata.TensaoNormal}" />
+            <TextBox Width="150" Text="{Binding TensaoNormal}" />
             <TextBlock Text="Resistencia solo"/>
-            <TextBox Width="150" Text="{Binding Sapata.TensaoAdmissivelSolo}" />
+            <TextBox Width="150" Text="{Binding TensaoAdmissivelSolo}" />
             <Button Content="Dimensionar" 
                     Margin="0 10 0 0" 
                     Command="{Binding DimensionarSapataCommand, Source={StaticResource sapataVM}}"
