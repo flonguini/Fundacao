@@ -23,10 +23,7 @@ namespace Fundacao.ViewModels
 
         public void DimensionarSapata(SapataModel sapataUI)
         {
-            Sapata.TensaoNormal = sapataUI.TensaoNormal;
-            Sapata.TensaoAdmissivelSolo = sapataUI.TensaoAdmissivelSolo;
-            Sapata.PilarMaiorLado = sapataUI.PilarMaiorLado;
-            Sapata.PilarMenorLado = sapataUI.PilarMenorLado;
+            Sapata = sapataUI;
         }
     }
 }

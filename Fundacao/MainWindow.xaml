@@ -21,7 +21,7 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="Menor lado pilar"/>
-            <TextBox Width="150" Text="{Binding Sapata.PilarMenorLado}" />
+            <TextBox Width="150" Text="{Binding Sapata.PilarMenorLado}"/>
             <TextBlock Text="Maior lado pilar"/>
             <TextBox Width="150" Text="{Binding Sapata.PilarMaiorLado}" />
             <TextBlock Text="Tensao Normal"/>
