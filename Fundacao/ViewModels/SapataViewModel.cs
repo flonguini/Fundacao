@@ -28,6 +28,10 @@ namespace Fundacao.ViewModels
             set
             {
                 _pilarMenorLado = value;
+                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
+                {
+                    DimensionarSapata();
+                }
                 OnPropertyChanged();
             }
         }
@@ -38,6 +42,10 @@ namespace Fundacao.ViewModels
             set
             {
                 _pilarMaiorLado = value;
+                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
+                {
+                    DimensionarSapata();
+                }
                 OnPropertyChanged();
             }
         }
@@ -48,6 +56,10 @@ namespace Fundacao.ViewModels
             set
             {
                 _tensaoAdmissivelSolo = value;
+                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
+                {
+                    DimensionarSapata();
+                }
                 OnPropertyChanged();
             }
         }
@@ -58,7 +70,7 @@ namespace Fundacao.ViewModels
             set
             {
                 _tensaoNormal = value;
-                if (Sapata.MenorLado.ToString() != "NaN")
+                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
                 {
                     DimensionarSapata();
                 }

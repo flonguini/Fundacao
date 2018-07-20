@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Fundacao.Models;
+using System;
 using System.Windows.Input;
 
 namespace Fundacao.ViewModels.Commands
@@ -12,15 +13,26 @@ namespace Fundacao.ViewModels.Commands
             SapataViewModel = sapataViewModel;
         }
 
-        public event EventHandler CanExecuteChanged;
+
+        //Not the best way, fix that.
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
+
 
         public bool CanExecute(object parameter)
         {
-            if (CanExecuteChanged != null)
+            if (parameter != null)
             {
-                return true;
+                var sapata = (SapataViewModel)parameter; // var sapata = parameter as SapataViewModel
+                if (sapata.PilarMaiorLado != 0 && sapata.PilarMenorLado != 0 && sapata.TensaoAdmissivelSolo !=0 && sapata.TensaoNormal != 0)
+                {
+                    return true;
+                }
             }
-           return false;
+            return false;
         }
 
         public void Execute(object parameter)

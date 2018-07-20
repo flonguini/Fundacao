@@ -31,7 +31,7 @@
             <Button Content="Dimensionar" 
                     Margin="0 10 0 0" 
                     Command="{Binding DimensionarSapataCommand, Source={StaticResource sapataVM}}"
-                    CommandParameter="{Binding Sapata}"/>
+                    CommandParameter="{Binding}"/> <!-- Biding with sapataVM -->
         </StackPanel>
 
         <StackPanel Grid.Column="1" HorizontalAlignment="Center">
@@ -41,6 +41,8 @@
             <TextBlock Text="{Binding Sapata.MenorLado}" />
             <TextBlock Text="Maior lado"  />
             <TextBlock Text="{Binding Sapata.MaiorLado}" />
+            <TextBlock Text="Altura"  />
+            <TextBlock Text="{Binding Sapata.Altura}" />
         </StackPanel>
         
     </Grid>
