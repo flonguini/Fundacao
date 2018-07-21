@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Fundacao.ViewModels"
         xmlns:local="clr-namespace:Fundacao"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="250" Width="500">
+        Title="MainWindow" Height="270" Width="500">
 
     <Window.Resources>
         <vm:SapataViewModel x:Key="sapataVM" />
@@ -43,6 +43,12 @@
             <TextBlock Text="{Binding Sapata.MaiorLado}" />
             <TextBlock Text="Altura"  />
             <TextBlock Text="{Binding Sapata.Altura}" />
+            <TextBlock Text="Altura Face"  />
+            <TextBlock Text="{Binding Sapata.AlturaFace}" />
+            <TextBlock Text="Balanço"  />
+            <TextBlock Text="{Binding Sapata.Balanco}" />
+            <TextBlock Text="Ângulo face inclinada"  />
+            <TextBlock Text="{Binding Sapata.AnguloSuperficieInclinada}" />
         </StackPanel>
         
     </Grid>

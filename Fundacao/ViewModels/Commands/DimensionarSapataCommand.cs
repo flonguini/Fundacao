@@ -1,6 +1,7 @@
 ﻿using Fundacao.Models;
 using System;
 using System.Windows.Input;
+using System.Diagnostics;
 
 namespace Fundacao.ViewModels.Commands
 {
@@ -14,7 +15,7 @@ namespace Fundacao.ViewModels.Commands
         }
 
 
-        //Not the best way, fix that.
+        //Not the best way, fix that. RelayCommand
         public event EventHandler CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }

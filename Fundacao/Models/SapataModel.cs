@@ -14,6 +14,9 @@ namespace Fundacao.Models
         private double _areaSuporte;
         private double _tensaoNormal;
         private double _altura;
+        private double _balanco;
+        private double _anguloSuperficieInclinada;
+        private double _alturaFace;
 
         #endregion
 
@@ -37,7 +40,6 @@ namespace Fundacao.Models
             set{ _maiorLado = value; }
         }
 
-
         /// <summary>
         /// Gets e Sets a área necessária para não romper o solo
         /// </summary>
@@ -54,6 +56,24 @@ namespace Fundacao.Models
         {
             get { return DimensionarAltura(); }
             set { _altura = value; }
+        }
+
+        /// <summary>
+        /// Gets e Sets o balanço da sapata 
+        /// </summary>
+        public double Balanco
+        {
+            get { return DimensionarBalanco(); }
+            set { _balanco = value; }
+        }
+
+        /// <summary>
+        /// Gets e Sets o ângulo da superficie inclinada da sapata
+        /// </summary>
+        public double AnguloSuperficieInclinada
+        {
+            get => DimensionarAnguloSuperficieInclinada();
+            set => _anguloSuperficieInclinada = value;
         }
 
         /// <summary>
@@ -112,6 +132,15 @@ namespace Fundacao.Models
             }
         }
 
+        /// <summary>
+        /// Gets e Sets a altura da face da sapata
+        /// </summary>
+        public double AlturaFace
+        {
+            get { return DimensionarAlturaFace(); }
+            set { _alturaFace = value; }
+        }
+        
         #endregion
 
         #region Methods
@@ -140,13 +169,34 @@ namespace Fundacao.Models
             return (MaiorLado - PilarMaiorLado) / 3;
         }
 
+        //Dimensiona a altura da face da sapata
+        private double DimensionarAlturaFace()
+        {
+            return ((Altura / 3) >= 15) ? Altura / 3 : 15; 
+        }
+
+        //Dimensiona o balanço da sapata
+        private double DimensionarBalanco()
+        {
+            return 0.5 * (MaiorLado - PilarMaiorLado);
+        }
+
+        //Dimensiona o ângulo da face inclinada da sapata
+        private double DimensionarAnguloSuperficieInclinada()
+        {
+            return Math.Atan((Altura - AlturaFace) / Balanco) * 180 / Math.PI;
+        }
+
         // Passa os nomes das propriedades para a INPC 
         private void PropriedadesAlteradas()
         {
-            OnPropertyChanged("MenorLado");
-            OnPropertyChanged("MaiorLado");
-            OnPropertyChanged("Altura");
-            OnPropertyChanged("AreaSuporte");
+            OnPropertyChanged(nameof(MenorLado));
+            OnPropertyChanged(nameof(MaiorLado));
+            OnPropertyChanged(nameof(Altura));
+            OnPropertyChanged(nameof(AreaSuporte));
+            OnPropertyChanged(nameof(AlturaFace));
+            OnPropertyChanged(nameof(Balanco));
+            OnPropertyChanged(nameof(AnguloSuperficieInclinada));
         }
 
         #endregion
