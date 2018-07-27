@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Fundacao.ViewModels"
         xmlns:local="clr-namespace:Fundacao"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="270" Width="500">
+        Title="MainWindow" Height="350" Width="850">
 
     <Window.Resources>
         <vm:SapataViewModel x:Key="sapataVM" />
@@ -21,35 +21,68 @@
 
         <StackPanel Grid.Column="0">
             <TextBlock Text="Menor lado pilar"/>
-            <TextBox Width="150" Text="{Binding PilarMenorLado}"/>
+            <TextBox Width="150" Text="{Binding PilarMenorLado, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Maior lado pilar"/>
-            <TextBox Width="150" Text="{Binding PilarMaiorLado}" />
-            <TextBlock Text="Tensao Normal"/>
-            <TextBox Width="150" Text="{Binding TensaoNormal}" />
+            <TextBox Width="150" Text="{Binding PilarMaiorLado, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Resistencia solo"/>
-            <TextBox Width="150" Text="{Binding TensaoAdmissivelSolo}" />
+            <TextBox Width="150" Text="{Binding TensaoAdmSolo}" />
+            <TextBlock Text="Tensao Normal"/>
+            <TextBox Width="150" Text="{Binding TensaoNormal, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="Dimensionar" 
                     Margin="0 10 0 0" 
                     Command="{Binding DimensionarSapataCommand, Source={StaticResource sapataVM}}"
                     CommandParameter="{Binding}"/> <!-- Biding with sapataVM -->
         </StackPanel>
 
-        <StackPanel Grid.Column="1" HorizontalAlignment="Center">
-            <TextBlock Text="Area de Suporte" />
-            <TextBlock Text="{Binding Sapata.AreaSuporte}" />
-            <TextBlock Text="Menor lado" />
-            <TextBlock Text="{Binding Sapata.MenorLado}" />
-            <TextBlock Text="Maior lado"  />
-            <TextBlock Text="{Binding Sapata.MaiorLado}" />
-            <TextBlock Text="Altura"  />
-            <TextBlock Text="{Binding Sapata.Altura}" />
-            <TextBlock Text="Altura Face"  />
-            <TextBlock Text="{Binding Sapata.AlturaFace}" />
-            <TextBlock Text="Balanço"  />
-            <TextBlock Text="{Binding Sapata.Balanco}" />
-            <TextBlock Text="Ângulo face inclinada"  />
-            <TextBlock Text="{Binding Sapata.AnguloSuperficieInclinada}" />
+
+        <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <StackPanel>
+                <TextBlock FontSize="25" FontWeight="Bold">Geometria</TextBlock>
+                <TextBlock Text="Area de Suporte" />
+                <TextBlock Text="{Binding Sapata.AreaSuporte}" />
+                <TextBlock Text="Menor lado" />
+                <TextBlock Text="{Binding Sapata.MenorLado}" />
+                <TextBlock Text="Maior lado"  />
+                <TextBlock Text="{Binding Sapata.MaiorLado}" />
+                <TextBlock Text="Altura"  />
+                <TextBlock Text="{Binding Sapata.Altura}" />
+                <TextBlock Text="Altura Face"  />
+                <TextBlock Text="{Binding Sapata.AlturaFace}" />
+                <TextBlock Text="Balanço"  />
+                <TextBlock Text="{Binding Sapata.Balanco}" />
+                <TextBlock Text="Ângulo face inclinada"  />
+                <TextBlock Text="{Binding Sapata.AnguloSuperficieInclinada}" />
+            </StackPanel>
+            <StackPanel Margin="15,0,0,0">
+                <TextBlock FontSize="25" FontWeight="Bold">Esforços</TextBlock>
+                <TextBlock Text="Pressão no Solo" />
+                <TextBlock Text="{Binding Sapata.PressaoNoSolo, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="Momento paralelo menor dimensão" />
+                <TextBlock Text="{Binding Sapata.MomentoParaleloMenorDimensao}" />
+                <TextBlock Text="Momento paralelo maior dimensao" />
+                <TextBlock Text="{Binding Sapata.MomentoParaleloMaiorDimensao}" />
+                <TextBlock Text="Área de aço A" />
+                <TextBlock Text="{Binding Sapata.AreaAcoMaiorDimensao}" />
+                <TextBlock Text="Área de aço B" />
+                <TextBlock Text="{Binding Sapata.AreaAcoMenorDimensao}" />
+                <TextBlock Text="Cisalhante Resistente" />
+                <TextBlock Text="{Binding Sapata.CisalhanteResistente}" />
+                <TextBlock Text="Cisalhante Atuante" />
+                <TextBlock Text="{Binding Sapata.CisalhanteAtuante}" />
+            </StackPanel>
+            <StackPanel>
+                <TextBlock FontSize="25" FontWeight="Bold">Detalhamento</TextBlock>
+                <TextBlock>Comprimento do aço maior lado</TextBlock>
+                <TextBlock Text="" />
+                <TextBlock>Comprimento do aço menor lado</TextBlock>
+                <TextBlock Text="" />
+                <TextBlock>Comprimento total do aço maior lado</TextBlock>
+                <TextBlock Text="" />
+                <TextBlock>Comprimento total do aço menor lado</TextBlock>
+
+            </StackPanel>
         </StackPanel>
+        
         
     </Grid>
 </Window>

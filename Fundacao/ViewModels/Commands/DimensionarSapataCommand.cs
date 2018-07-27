@@ -28,7 +28,7 @@ namespace Fundacao.ViewModels.Commands
             if (parameter != null)
             {
                 var sapata = (SapataViewModel)parameter; // var sapata = parameter as SapataViewModel
-                if (sapata.PilarMaiorLado != 0 && sapata.PilarMenorLado != 0 && sapata.TensaoAdmissivelSolo !=0 && sapata.TensaoNormal != 0)
+                if (sapata.PilarMaiorLado != 0 && sapata.PilarMenorLado != 0 && sapata.TensaoAdmSolo !=0 && sapata.TensaoNormal != 0)
                 {
                     return true;
                 }

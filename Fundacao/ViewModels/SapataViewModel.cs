@@ -50,7 +50,7 @@ namespace Fundacao.ViewModels
             }
         }
 
-        public double TensaoAdmissivelSolo
+        public double TensaoAdmSolo
         {
             get { return _tensaoAdmissivelSolo; }
             set
@@ -87,7 +87,7 @@ namespace Fundacao.ViewModels
         public void DimensionarSapata()
         {
             Sapata.TensaoNormal = TensaoNormal;
-            Sapata.TensaoAdmissivelSolo = TensaoAdmissivelSolo;
+            Sapata.TensaoAdmSolo = TensaoAdmSolo;
             Sapata.PilarMaiorLado = PilarMaiorLado;
             Sapata.PilarMenorLado = PilarMenorLado;
         }

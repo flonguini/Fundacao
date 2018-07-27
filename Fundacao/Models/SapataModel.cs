@@ -6,9 +6,10 @@ namespace Fundacao.Models
     {
         #region Private fields
 
+        //Geometria
         private double _pilarMenorLado; 
         private double _pilarMaiorLado; 
-        private double _tensaoAdmissivelSolo; 
+        private double _tensaoAdmSolo; 
         private double _menorLado;
         private double _maiorLado;
         private double _areaSuporte;
@@ -17,6 +18,15 @@ namespace Fundacao.Models
         private double _balanco;
         private double _anguloSuperficieInclinada;
         private double _alturaFace;
+
+        //Esforços
+        private double _pressaoNoSolo;
+        private double _momentoParaleloMenorDimensao;
+        private double _momentoParaleloMaiorDimensao;
+        private double _areaAcoMenorDimensao;
+        private double _areaAcoMaiorDimensao;
+        private double _cisalhanteResistente;
+        private double _cisalhanteAtuante;
 
         #endregion
 
@@ -107,12 +117,12 @@ namespace Fundacao.Models
         /// <summary>
         /// Gets e Sets a tensão admissível do solo
         /// </summary>
-        public double TensaoAdmissivelSolo
+        public double TensaoAdmSolo
         {
-            get { return _tensaoAdmissivelSolo; }
+            get { return _tensaoAdmSolo; }
             set
             {
-                _tensaoAdmissivelSolo = value;
+                _tensaoAdmSolo = value;
                 OnPropertyChanged();
                 PropriedadesAlteradas();
             }
@@ -140,6 +150,52 @@ namespace Fundacao.Models
             get { return DimensionarAlturaFace(); }
             set { _alturaFace = value; }
         }
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////// Esforços
+        public double PressaoNoSolo
+        {
+            get { return DimensionarPressaoNoSolo(); }
+            set { _pressaoNoSolo = value; }
+        }
+
+        public double MomentoParaleloMenorDimensao
+        {
+            get { return DimensionarMomento(nameof(MomentoParaleloMenorDimensao)); }
+            set { _momentoParaleloMenorDimensao = value; }
+        }
+
+        public double MomentoParaleloMaiorDimensao
+        {
+            get { return DimensionarMomento(nameof(MomentoParaleloMaiorDimensao)); }
+            set { _momentoParaleloMaiorDimensao = value; }
+        }
+
+        public double AreaAcoMaiorDimensao
+        {
+            get { return DimensaionarAreaAco(nameof(AreaAcoMaiorDimensao)); }
+            set { _areaAcoMaiorDimensao = value; }
+        }
+
+        public double AreaAcoMenorDimensao
+        {
+            get { return DimensaionarAreaAco(nameof(AreaAcoMenorDimensao)); }
+            set { _areaAcoMenorDimensao = value; }
+        }
+
+
+        public double CisalhanteResistente
+        {
+            get { return DimensionarCisalhanteResistente(); }
+            set { _cisalhanteResistente = value; }
+        }
+
+        
+
+        public double CisalhanteAtuante
+        {
+            get { return DimensionarCisalhanteAtuante(); }
+            set { _cisalhanteAtuante = value; }
+        }
         
         #endregion
 
@@ -148,7 +204,8 @@ namespace Fundacao.Models
         //Dimensiona a área necessária para não romper o solos
         private double DimensionarAreaSuporte()
         {
-            return 1.1 * TensaoNormal / TensaoAdmissivelSolo;
+            //TODO: Receber a procentagem de peso da sapata
+            return 1.1 * TensaoNormal / TensaoAdmSolo;
         }
 
         //Dimensiona o menor lado da sapata
@@ -187,6 +244,63 @@ namespace Fundacao.Models
             return Math.Atan((Altura - AlturaFace) / Balanco) * 180 / Math.PI;
         }
 
+        ////////////////////////////////////////////////////////////////////////////////////// Esforços
+
+        //Dimensiona a pressão exercida pela sapata no solo
+        private double DimensionarPressaoNoSolo()
+        {
+            // TODO: 1.4 ajustar para gamaF
+            return (1.4 * TensaoNormal) / (MaiorLado * MenorLado);
+        }
+
+        //Dimensiona o momento solicitante para as duas direções da sapata
+        private double DimensionarMomento(string direcao)
+        {
+            switch (direcao)
+            {
+                case "MomentoParaleloMaiorDimensao":
+                    double xa = Balanco + 0.15 * PilarMenorLado;
+                    return PressaoNoSolo * Math.Pow(xa, 2) * MaiorLado * 0.5;
+
+                case "MomentoParaleloMenorDimensao":
+                    double xb = Balanco + 0.15 * PilarMaiorLado;
+                    return PressaoNoSolo * Math.Pow(xb, 2) * MenorLado * 0.5;
+
+                default:
+                    return 0;
+            }
+        }
+
+        //Dimensiona a área de aço necessária para os dois lados da sapata
+        private double DimensaionarAreaAco(string lado)
+        {
+            //TODO: Ajustar 50 para gamaS e 1.15 para fator de redução do usuário
+            switch (lado)
+            {
+                case "AreaAcoMenorDimensao":
+                    return (MomentoParaleloMaiorDimensao * 1.15) / (0.85 * Altura * 50 * (MaiorLado / 100));
+
+                case "AreaAcoMaiorDimensao":
+                    return (MomentoParaleloMenorDimensao * 1.15) / (0.85 * Altura * 50 * (MenorLado / 100));
+
+                default:
+                    return 0;
+            }
+        }
+
+        //Dimensiona a força cisalhante resistente do concreto
+        private double DimensionarCisalhanteResistente()
+        {
+            //TODO: Fck 25 deve entrar como parâmetro - 1.4 deve entrar como gammaF
+            return 0.27 * (1.0 - (25.0 / 250.0)) * 2.5 / 1.4;
+        }
+
+        //Dimensiona a força cisalhante atuante
+        private double DimensionarCisalhanteAtuante()
+        {
+            return (1.4 * TensaoNormal) / ((2 * (PilarMaiorLado + PilarMenorLado)) * Altura);
+        }
+
         // Passa os nomes das propriedades para a INPC 
         private void PropriedadesAlteradas()
         {
@@ -197,6 +311,13 @@ namespace Fundacao.Models
             OnPropertyChanged(nameof(AlturaFace));
             OnPropertyChanged(nameof(Balanco));
             OnPropertyChanged(nameof(AnguloSuperficieInclinada));
+            OnPropertyChanged(nameof(PressaoNoSolo));
+            OnPropertyChanged(nameof(MomentoParaleloMaiorDimensao));
+            OnPropertyChanged(nameof(MomentoParaleloMenorDimensao));
+            OnPropertyChanged(nameof(AreaAcoMaiorDimensao));
+            OnPropertyChanged(nameof(AreaAcoMenorDimensao));
+            OnPropertyChanged(nameof(CisalhanteAtuante));
+            OnPropertyChanged(nameof(CisalhanteResistente));
         }
 
         #endregion
