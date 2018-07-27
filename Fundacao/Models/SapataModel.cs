@@ -28,6 +28,8 @@ namespace Fundacao.Models
         private double _cisalhanteResistente;
         private double _cisalhanteAtuante;
 
+        //Detalhamento
+
         #endregion
 
         #region Public properties
@@ -152,51 +154,71 @@ namespace Fundacao.Models
         }
 
         /////////////////////////////////////////////////////////////////////////////////////////////////// Esforços
+        /// <summary>
+        /// Gets e sets a pressão de solo
+        /// </summary>
         public double PressaoNoSolo
         {
             get { return DimensionarPressaoNoSolo(); }
             set { _pressaoNoSolo = value; }
         }
 
+        /// <summary>
+        /// Gets e sets o momento paralelo a menor dimensão da sapata
+        /// </summary>
         public double MomentoParaleloMenorDimensao
         {
             get { return DimensionarMomento(nameof(MomentoParaleloMenorDimensao)); }
             set { _momentoParaleloMenorDimensao = value; }
         }
 
+        /// <summary>
+        /// Gets e sets o momento paralelo a maior dimensão da sapata
+        /// </summary>
         public double MomentoParaleloMaiorDimensao
         {
             get { return DimensionarMomento(nameof(MomentoParaleloMaiorDimensao)); }
             set { _momentoParaleloMaiorDimensao = value; }
         }
 
+        /// <summary>
+        /// Gets e sets a área de aço para a maior dimensão
+        /// </summary>
         public double AreaAcoMaiorDimensao
         {
             get { return DimensaionarAreaAco(nameof(AreaAcoMaiorDimensao)); }
             set { _areaAcoMaiorDimensao = value; }
         }
 
+        /// <summary>
+        /// Gets e sets a área de aço para a menor dimensão
+        /// </summary>
         public double AreaAcoMenorDimensao
         {
             get { return DimensaionarAreaAco(nameof(AreaAcoMenorDimensao)); }
             set { _areaAcoMenorDimensao = value; }
         }
 
-
+        /// <summary>
+        /// Gets e sets a força cisalhante resistente
+        /// </summary>
         public double CisalhanteResistente
         {
             get { return DimensionarCisalhanteResistente(); }
             set { _cisalhanteResistente = value; }
         }
 
-        
-
+        /// <summary>
+        /// Gets e sets a força cisalhante atuante
+        /// </summary>
         public double CisalhanteAtuante
         {
             get { return DimensionarCisalhanteAtuante(); }
             set { _cisalhanteAtuante = value; }
         }
-        
+
+        /////////////////////////////////////////////////////////////////////////////////////////////////// Detalhamento
+
         #endregion
 
         #region Methods
