@@ -26,8 +26,8 @@
             <TextBox Width="150" Text="{Binding PilarMenorLado, UpdateSourceTrigger=PropertyChanged}"/>
             <TextBlock Text="Maior lado pilar (cm)"/>
             <TextBox Width="150" Text="{Binding PilarMaiorLado, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="Resistencia solo (kN/cm²)"/>
-            <TextBox Width="150" Text="{Binding TensaoAdmSolo}" />
+            <TextBlock Text="Resistencia solo (kPa)"/>
+            <TextBox Width="150" Text="{Binding TensaoAdmSolo, UpdateSourceTrigger=PropertyChanged}" />
             <TextBlock Text="Tensao Normal (kN)"/>
             <TextBox Width="150" Text="{Binding TensaoNormal, UpdateSourceTrigger=PropertyChanged}" />
             <Button Content="Dimensionar" 
@@ -41,52 +41,54 @@
             <StackPanel>
                 <TextBlock FontSize="25" FontWeight="Bold">Geometria</TextBlock>
                 <TextBlock Text="Area de Suporte" />
-                <TextBlock Text="{Binding Sapata.AreaSuporte, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Geometria.AreaSuporte, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Menor lado" />
-                <TextBlock Text="{Binding Sapata.MenorLado, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Geometria.MenorLado, Converter={StaticResource conv}}" />
                 <TextBlock Text="Maior lado"  />
-                <TextBlock Text="{Binding Sapata.MaiorLado, Converter={StaticResource conv}}" />
-                <TextBlock Text="Altura"  />
-                <TextBlock Text="{Binding Sapata.Altura, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Geometria.MaiorLado, Converter={StaticResource conv}}" />
+                <TextBlock Text="Altura total"  />
+                <TextBlock Text="{Binding Geometria.Altura, Converter={StaticResource conv}}" />
                 <TextBlock Text="Altura Face"  />
-                <TextBlock Text="{Binding Sapata.AlturaFace, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Geometria.AlturaFace, Converter={StaticResource conv}}" />
                 <TextBlock Text="Balanço"  />
-                <TextBlock Text="{Binding Sapata.Balanco, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Geometria.Balanco, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Ângulo face inclinada"  />
-                <TextBlock Text="{Binding Sapata.AnguloSuperficieInclinada, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Geometria.AnguloSuperficieInclinada, StringFormat={}{0:0.000}}" />
             </StackPanel>
             <StackPanel Margin="15,0,0,0">
                 <TextBlock FontSize="25" FontWeight="Bold">Esforços</TextBlock>
                 <TextBlock Text="Pressão no Solo" />
-                <TextBlock Text="{Binding Sapata.PressaoNoSolo, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.PressaoNoSolo, StringFormat={}{0:0.000000}}" />
                 <TextBlock Text="Momento paralelo menor dimensão" />
-                <TextBlock Text="{Binding Sapata.MomentoParaleloMenorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.MomentoParaleloMenorDimensao,  StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Momento paralelo maior dimensao" />
-                <TextBlock Text="{Binding Sapata.MomentoParaleloMaiorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.MomentoParaleloMaiorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Área de aço A" />
-                <TextBlock Text="{Binding Sapata.AreaAcoMaiorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.AreaAcoMaiorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Área de aço B" />
-                <TextBlock Text="{Binding Sapata.AreaAcoMenorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.AreaAcoMenorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Cisalhante Resistente" />
-                <TextBlock Text="{Binding Sapata.CisalhanteResistente, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.CisalhanteResistente, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Cisalhante Atuante" />
-                <TextBlock Text="{Binding Sapata.CisalhanteAtuante, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Esforcos.CisalhanteAtuante, StringFormat={}{0:0.000}}" />
             </StackPanel>
             
             <StackPanel Margin="15,0,0,0">
                 <TextBlock FontSize="25" FontWeight="Bold">Detalhamento</TextBlock>
                 <TextBlock>Comprimento de ancoragem (lb,nec)</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.ComprimentoAncoragem }" />
                 <TextBlock>Comprimento do aço maior lado</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.ComprimentoAcoMaiorLado}" />
                 <TextBlock>Comprimento do aço menor lado</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.ComprimentoAcoMenorLado}" />
+                <TextBlock>Dobra</TextBlock>
+                <TextBlock Text="{Binding Detalhamento.Dobra}" />
                 <TextBlock>Comprimento total do aço maior lado</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.ComprimentoTotalMaiorDimensao}" />
                 <TextBlock>Comprimento total do aço menor lado</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.ComprimentoTotalMenorDimensao}" />
                 <TextBlock>Comprimento gancho inclinado</TextBlock>
-                <TextBlock Text="" />
+                <TextBlock Text="{Binding Detalhamento.DobraInclinada}" />
 
             </StackPanel>
         </StackPanel>

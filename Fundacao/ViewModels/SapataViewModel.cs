@@ -6,10 +6,14 @@ namespace Fundacao.ViewModels
     public class SapataViewModel : ModelBase
     {
         private SapataModel _sapata;
+        private DadosEntradaModel _dadosEntrada = new DadosEntradaModel();
+        private GeometriaModel _geometria;
+        private EsforcosModel _esforcos;
         private double _pilarMenorLado;
         private double _pilarMaiorLado;
         private double _tensaoAdmissivelSolo;
         private double _tensaoNormal;
+        private DetalhamentoModel _detalhamento;
 
         public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
 
@@ -19,6 +23,37 @@ namespace Fundacao.ViewModels
             set
             {
                 _sapata = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public GeometriaModel Geometria
+        {
+            get { return _geometria; }
+            set
+            {
+                _geometria = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public EsforcosModel Esforcos
+        {
+            get { return _esforcos; }
+            set
+            {
+                _esforcos = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public DetalhamentoModel Detalhamento
+        {
+            get { return _detalhamento; }
+            set
+            {
+                _detalhamento = value;
+                OnPropertyChanged();
             }
         }
 
@@ -28,10 +63,8 @@ namespace Fundacao.ViewModels
             set
             {
                 _pilarMenorLado = value;
-                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
-                {
-                    DimensionarSapata();
-                }
+
+                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
                 OnPropertyChanged();
             }
         }
@@ -42,10 +75,9 @@ namespace Fundacao.ViewModels
             set
             {
                 _pilarMaiorLado = value;
-                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
-                {
-                    DimensionarSapata();
-                }
+
+                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+
                 OnPropertyChanged();
             }
         }
@@ -56,10 +88,9 @@ namespace Fundacao.ViewModels
             set
             {
                 _tensaoAdmissivelSolo = value;
-                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
-                {
-                    DimensionarSapata();
-                }
+
+                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+
                 OnPropertyChanged();
             }
         }
@@ -70,26 +101,39 @@ namespace Fundacao.ViewModels
             set
             {
                 _tensaoNormal = value;
-                if (Sapata.MenorLado.ToString() != "NaN" || Sapata.MaiorLado.ToString() != "NaN")
-                {
-                    DimensionarSapata();
-                }
+
+                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+
                 OnPropertyChanged();
             }
         }
 
         public SapataViewModel()
         {
-            Sapata = new SapataModel();
+            _dadosEntrada.TensaoAdmSolo = TensaoAdmSolo;
+            _dadosEntrada.TensaoNormal = TensaoNormal;
+            _dadosEntrada.PilarMaiorLado = PilarMaiorLado;
+            _dadosEntrada.PilarMenorLado = PilarMenorLado;
+
+            Sapata = new SapataModel(_dadosEntrada);
+
+            Geometria = new GeometriaModel(_dadosEntrada);
+
+            Detalhamento = new DetalhamentoModel(_dadosEntrada);
+
             DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
 
         public void DimensionarSapata()
         {
-            Sapata.TensaoNormal = TensaoNormal;
-            Sapata.TensaoAdmSolo = TensaoAdmSolo;
-            Sapata.PilarMaiorLado = PilarMaiorLado;
-            Sapata.PilarMenorLado = PilarMenorLado;
+            Sapata.DadosEntrada.TensaoAdmSolo = (TensaoAdmSolo/10000);
+            Sapata.DadosEntrada.TensaoNormal = TensaoNormal;
+            Sapata.DadosEntrada.PilarMaiorLado = PilarMaiorLado;
+            Sapata.DadosEntrada.PilarMenorLado = PilarMenorLado;
+
+            Geometria = new GeometriaModel(Sapata.DadosEntrada);
+            Esforcos = new EsforcosModel(Sapata.DadosEntrada);
+            Detalhamento = new DetalhamentoModel(Sapata.DadosEntrada);
         }
     }
 }

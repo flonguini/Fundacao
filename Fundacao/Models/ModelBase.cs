@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using SteelLibrary;
 
 namespace Fundacao.Models
 {

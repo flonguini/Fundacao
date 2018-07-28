@@ -54,7 +54,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\DetalhamentoModel.cs" />
+    <Compile Include="Models\EsforcosModel.cs" />
+    <Compile Include="Models\GeometriaModel.cs" />
     <Compile Include="Models\ModelBase.cs" />
+    <Compile Include="Models\SapataModel.cs" />
     <Compile Include="ViewModels\Commands\DimensionarSapataCommand.cs" />
     <Compile Include="ViewModels\Converters\ValueConverter.cs" />
     <Compile Include="ViewModels\SapataViewModel.cs" />
@@ -72,7 +76,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\SapataModel.cs" />
+    <Compile Include="Models\DadosEntradaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
