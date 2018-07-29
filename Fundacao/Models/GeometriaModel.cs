@@ -2,75 +2,105 @@
 
 namespace Fundacao.Models
 {
-    public class GeometriaModel : SapataModel
+    public class GeometriaModel
     {
-        public GeometriaModel(DadosEntradaModel dados) : base(dados) { }
+        #region Private Fields
 
-        public double MenorLado
+        private readonly DadosEntradaModel _dados;
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Construtor padrão da classe Geometria
+        /// </summary>
+        /// <param name="dados">Parâmetros de entrada da classe EntradaDadosModel</param>
+        public GeometriaModel(DadosEntradaModel dados)
         {
-            get { return DimensionarMenorLado(); }
+            _dados = dados;
         }
 
-        public double MaiorLado
-        {
-            get { return DimensionarMaiorLado(); }
-        }
+        #endregion
 
-        public double AreaSuporte
-        {
-            get { return DimensionarAreaSuporte(); }
-        }
+        #region Public Properties
 
-        public double Altura
-        {
-            get { return DimensionarAltura(); }
-        }
+        /// <summary>
+        /// Recebe o valor do menor lado da sapata
+        /// </summary>
+        public double MenorLado { get => DimensionarMenorLado(); }
 
-        public double Balanco
-        {
-            get { return DimensionarBalanco(); }
-        }
+        /// <summary>
+        /// Recebe o valor do maior lado da sapata
+        /// </summary>
+        public double MaiorLado { get =>  DimensionarMaiorLado(); }
+        
+        /// <summary>
+        /// Recebe a área necessária para não romper o solo
+        /// </summary>
+        public double AreaSuporte { get => DimensionarAreaSuporte(); }
 
-        public double AnguloSuperficieInclinada
-        {
-            get { return DimensionarAnguloSuperficieInclinada(); }
-        }
+        /// <summary>
+        /// Recebe a altura total da sapata
+        /// </summary>
+        public double Altura { get => DimensionarAltura(); }
 
-        public double AlturaFace
-        {
-            get { return DimensionarAlturaFace(); }
-        }
+        /// <summary>
+        /// Recebe o balanço para o cálculo do momento fletor
+        /// </summary>
+        public double Balanco { get => DimensionarBalanco(); }
 
+        /// <summary>
+        /// Recebe o ângulo da superfície inclinada
+        /// </summary>
+        public double AnguloSuperficieInclinada { get => DimensionarAnguloSuperficieInclinada(); }
+
+        /// <summary>
+        /// Recebe a altura da face da sapata
+        /// </summary>
+        public double AlturaFace { get => DimensionarAlturaFace(); }
+
+        #endregion
+
+        #region Private Methods
+
+        //Dimensiona a área de suporte
         private double DimensionarAreaSuporte()
         {
-            return 1.1 * DadosEntrada.TensaoNormal / DadosEntrada.TensaoAdmSolo;
+            return 1.1 * _dados.TensaoNormal / _dados.TensaoAdmSolo;
         }
 
+        //Dimensiona o menor lado da sapata
         private double DimensionarMenorLado()
         {
-            return 0.5 * (DadosEntrada.PilarMenorLado - DadosEntrada.PilarMaiorLado) + Math.Sqrt((0.25 * Math.Pow(DadosEntrada.PilarMenorLado - DadosEntrada.PilarMaiorLado, 2)) + AreaSuporte);
+            return 0.5 * (_dados.PilarMenorLado - _dados.PilarMaiorLado) + Math.Sqrt((0.25 * Math.Pow(_dados.PilarMenorLado - _dados.PilarMaiorLado, 2)) + AreaSuporte);
         }
 
+        //Dimensiona o maior lado da sapata
         private double DimensionarMaiorLado()
         {
-            return (DadosEntrada.PilarMaiorLado - DadosEntrada.PilarMenorLado) + MenorLado;
+            return (_dados.PilarMaiorLado - _dados.PilarMenorLado) + MenorLado;
         }
 
+        //Dimensiona a altura total da sapata
         private double DimensionarAltura()
         {
-            return (MaiorLado - DadosEntrada.PilarMaiorLado) / 3;
+            return (MaiorLado - _dados.PilarMaiorLado) / 3;
         }
 
+        //Dimensiona a altura da face da sapata
         private double DimensionarAlturaFace()
         {
             return ((Altura / 3) >= 15) ? Altura / 3 : 15;
         }
 
+        //Dimensiona o balanço para o cálculo do momento fletor
         private double DimensionarBalanco()
         {
-            return 0.5 * (ArredondarValor(MaiorLado) - DadosEntrada.PilarMaiorLado);
+            return 0.5 * (ArredondarValor(MaiorLado) - _dados.PilarMaiorLado);
         }
 
+        //Dimensiona o ângulo da superfício inclinada
         private double DimensionarAnguloSuperficieInclinada()
         {
             return Math.Atan((Altura - AlturaFace) / Balanco) * 180 / Math.PI;
@@ -81,5 +111,7 @@ namespace Fundacao.Models
         {
             return Math.Ceiling(valor / 5) * 5;
         }
+
+        #endregion
     }
 }

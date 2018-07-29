@@ -2,31 +2,29 @@
 
 namespace Fundacao.Models
 {
-    public class EsforcosModel : GeometriaModel 
+    public class EsforcosModel
     {
         #region Private fields
 
-        private double _pressaoNoSolo;
-        private double _momentoParaleloMenorDimensao;
-        private double _momentoParaleloMaiorDimensao;
-        private double _areaAcoMenorDimensao;
-        private double _areaAcoMaiorDimensao;
-        private double _cisalhanteResistente;
-        private double _cisalhanteAtuante;
+        private DadosEntradaModel _dados;
+        private GeometriaModel _geometria;
 
         #endregion
 
         #region Constructor
 
-        public EsforcosModel(DadosEntradaModel dados) : base(dados) { }
+        public EsforcosModel(DadosEntradaModel dados, GeometriaModel geometria) 
+        {
+            _geometria = geometria;
+            _dados = dados;
+        }
 
         #endregion
 
         #region Public Properties
         public double PressaoNoSolo
         {
-            get{ return DimensionarPressaoNoSolo(); }
-            set{ _pressaoNoSolo = value; }
+            get { return DimensionarPressaoNoSolo(); }
         }
 
         /// <summary>
@@ -35,7 +33,6 @@ namespace Fundacao.Models
         public double MomentoParaleloMenorDimensao
         {
             get { return DimensionarMomento(nameof(MomentoParaleloMenorDimensao)); }
-            set { _momentoParaleloMenorDimensao = value; }
         }
 
         /// <summary>
@@ -44,7 +41,6 @@ namespace Fundacao.Models
         public double MomentoParaleloMaiorDimensao
         {
             get { return DimensionarMomento(nameof(MomentoParaleloMaiorDimensao)); }
-            set { _momentoParaleloMaiorDimensao = value; }
         }
 
         /// <summary>
@@ -53,7 +49,6 @@ namespace Fundacao.Models
         public double AreaAcoMaiorDimensao
         {
             get { return DimensaionarAreaAco(nameof(AreaAcoMaiorDimensao)); }
-            set { _areaAcoMaiorDimensao = value; }
         }
 
         /// <summary>
@@ -62,7 +57,6 @@ namespace Fundacao.Models
         public double AreaAcoMenorDimensao
         {
             get { return DimensaionarAreaAco(nameof(AreaAcoMenorDimensao)); }
-            set { _areaAcoMenorDimensao = value; }
         }
 
         /// <summary>
@@ -71,7 +65,6 @@ namespace Fundacao.Models
         public double CisalhanteResistente
         {
             get { return DimensionarCisalhanteResistente(); }
-            set { _cisalhanteResistente = value; }
         }
 
         /// <summary>
@@ -80,7 +73,6 @@ namespace Fundacao.Models
         public double CisalhanteAtuante
         {
             get { return DimensionarCisalhanteAtuante(); }
-            set { _cisalhanteAtuante = value; }
         }
 
         #endregion
@@ -91,7 +83,7 @@ namespace Fundacao.Models
         private double DimensionarPressaoNoSolo()
         {
             // TODO: 1.4 ajustar para gamaF
-            return (1.4 * DadosEntrada.TensaoNormal) / (ArredondarValor(MaiorLado) * ArredondarValor(MenorLado));
+            return (1.4 * _dados.TensaoNormal) / (ArredondarValor(_geometria.MaiorLado) * ArredondarValor(_geometria.MenorLado));
         }
 
         //Dimensiona o momento solicitante para as duas direções da sapata
@@ -100,12 +92,12 @@ namespace Fundacao.Models
             switch (direcao)
             {
                 case "MomentoParaleloMaiorDimensao":
-                    double xa = Balanco + 0.15 * DadosEntrada.PilarMenorLado;
-                    return PressaoNoSolo * Math.Pow(xa, 2) * ArredondarValor(MaiorLado) * 0.5;
+                    double xa = _geometria.Balanco + 0.15 * _dados.PilarMenorLado;
+                    return PressaoNoSolo * Math.Pow(xa, 2) * ArredondarValor(_geometria.MaiorLado) * 0.5;
 
                 case "MomentoParaleloMenorDimensao":
-                    double xb = Balanco + 0.15 * DadosEntrada.PilarMaiorLado;
-                    return PressaoNoSolo * Math.Pow(xb, 2) * ArredondarValor(MenorLado) * 0.5;
+                    double xb = _geometria.Balanco + 0.15 * _dados.PilarMaiorLado;
+                    return PressaoNoSolo * Math.Pow(xb, 2) * ArredondarValor(_geometria.MenorLado) * 0.5;
 
                 default:
                     return 0;
@@ -118,10 +110,10 @@ namespace Fundacao.Models
             //TODO: Ajustar 50 para gamaS e 1.15 para fator de redução do usuário
             if (lado == "AreaAcoMenorDimensao")
             {
-                return (MomentoParaleloMaiorDimensao * 115) / (0.85 * ArredondarValor(Altura) * 50 * ArredondarValor(MaiorLado));
+                return (MomentoParaleloMaiorDimensao * 115) / (0.85 * ArredondarValor(_geometria.Altura) * 50 * ArredondarValor(_geometria.MaiorLado));
             }
-            return (MomentoParaleloMenorDimensao * 115) / (0.85 * ArredondarValor(Altura) * 50 * ArredondarValor(MenorLado));
-            
+            return (MomentoParaleloMenorDimensao * 115) / (0.85 * ArredondarValor(_geometria.Altura) * 50 * ArredondarValor(_geometria.MenorLado));
+
         }
 
         //Dimensiona a força cisalhante resistente do concreto
@@ -134,7 +126,7 @@ namespace Fundacao.Models
         //Dimensiona a força cisalhante atuante
         private double DimensionarCisalhanteAtuante()
         {
-            return (1.4 * DadosEntrada.TensaoNormal) / ((2 * (DadosEntrada.PilarMaiorLado + DadosEntrada.PilarMenorLado)) * ArredondarValor(Altura));
+            return (1.4 * _dados.TensaoNormal) / ((2 * (_dados.PilarMaiorLado + _dados.PilarMenorLado)) * ArredondarValor(_geometria.Altura));
         }
 
         //Arredonda um valor para o próximo múltiplo de 5

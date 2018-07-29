@@ -7,13 +7,10 @@ namespace Fundacao.ViewModels
     {
         private SapataModel _sapata;
         private DadosEntradaModel _dadosEntrada = new DadosEntradaModel();
-        private GeometriaModel _geometria;
-        private EsforcosModel _esforcos;
         private double _pilarMenorLado;
         private double _pilarMaiorLado;
         private double _tensaoAdmissivelSolo;
         private double _tensaoNormal;
-        private DetalhamentoModel _detalhamento;
 
         public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
 
@@ -27,36 +24,6 @@ namespace Fundacao.ViewModels
             }
         }
 
-        public GeometriaModel Geometria
-        {
-            get { return _geometria; }
-            set
-            {
-                _geometria = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public EsforcosModel Esforcos
-        {
-            get { return _esforcos; }
-            set
-            {
-                _esforcos = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public DetalhamentoModel Detalhamento
-        {
-            get { return _detalhamento; }
-            set
-            {
-                _detalhamento = value;
-                OnPropertyChanged();
-            }
-        }
-
         public double PilarMenorLado
         {
             get { return _pilarMenorLado; }
@@ -64,7 +31,7 @@ namespace Fundacao.ViewModels
             {
                 _pilarMenorLado = value;
 
-                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+                if (Sapata.Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
                 OnPropertyChanged();
             }
         }
@@ -76,7 +43,7 @@ namespace Fundacao.ViewModels
             {
                 _pilarMaiorLado = value;
 
-                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+                if (Sapata.Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
 
                 OnPropertyChanged();
             }
@@ -89,7 +56,7 @@ namespace Fundacao.ViewModels
             {
                 _tensaoAdmissivelSolo = value;
 
-                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+                if (Sapata.Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
 
                 OnPropertyChanged();
             }
@@ -102,7 +69,7 @@ namespace Fundacao.ViewModels
             {
                 _tensaoNormal = value;
 
-                if (Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
+                if (Sapata.Geometria.AreaSuporte.ToString() != "NaN") { DimensionarSapata(); }
 
                 OnPropertyChanged();
             }
@@ -116,11 +83,7 @@ namespace Fundacao.ViewModels
             _dadosEntrada.PilarMenorLado = PilarMenorLado;
 
             Sapata = new SapataModel(_dadosEntrada);
-
-            Geometria = new GeometriaModel(_dadosEntrada);
-
-            Detalhamento = new DetalhamentoModel(_dadosEntrada);
-
+           
             DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
 
@@ -131,9 +94,7 @@ namespace Fundacao.ViewModels
             Sapata.DadosEntrada.PilarMaiorLado = PilarMaiorLado;
             Sapata.DadosEntrada.PilarMenorLado = PilarMenorLado;
 
-            Geometria = new GeometriaModel(Sapata.DadosEntrada);
-            Esforcos = new EsforcosModel(Sapata.DadosEntrada);
-            Detalhamento = new DetalhamentoModel(Sapata.DadosEntrada);
+            Sapata = new SapataModel(Sapata.DadosEntrada);
         }
     }
 }

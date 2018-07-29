@@ -41,54 +41,54 @@
             <StackPanel>
                 <TextBlock FontSize="25" FontWeight="Bold">Geometria</TextBlock>
                 <TextBlock Text="Area de Suporte" />
-                <TextBlock Text="{Binding Geometria.AreaSuporte, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.AreaSuporte, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Menor lado" />
-                <TextBlock Text="{Binding Geometria.MenorLado, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.MenorLado, Converter={StaticResource conv}}" />
                 <TextBlock Text="Maior lado"  />
-                <TextBlock Text="{Binding Geometria.MaiorLado, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.MaiorLado, Converter={StaticResource conv}}" />
                 <TextBlock Text="Altura total"  />
-                <TextBlock Text="{Binding Geometria.Altura, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.Altura, Converter={StaticResource conv}}" />
                 <TextBlock Text="Altura Face"  />
-                <TextBlock Text="{Binding Geometria.AlturaFace, Converter={StaticResource conv}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.AlturaFace, Converter={StaticResource conv}}" />
                 <TextBlock Text="Balanço"  />
-                <TextBlock Text="{Binding Geometria.Balanco, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.Balanco, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Ângulo face inclinada"  />
-                <TextBlock Text="{Binding Geometria.AnguloSuperficieInclinada, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Geometria.AnguloSuperficieInclinada, StringFormat={}{0:0.000}}" />
             </StackPanel>
             <StackPanel Margin="15,0,0,0">
                 <TextBlock FontSize="25" FontWeight="Bold">Esforços</TextBlock>
                 <TextBlock Text="Pressão no Solo" />
-                <TextBlock Text="{Binding Esforcos.PressaoNoSolo, StringFormat={}{0:0.000000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.PressaoNoSolo, StringFormat={}{0:0.000000}}" />
                 <TextBlock Text="Momento paralelo menor dimensão" />
-                <TextBlock Text="{Binding Esforcos.MomentoParaleloMenorDimensao,  StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.MomentoParaleloMenorDimensao,  StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Momento paralelo maior dimensao" />
-                <TextBlock Text="{Binding Esforcos.MomentoParaleloMaiorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.MomentoParaleloMaiorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Área de aço A" />
-                <TextBlock Text="{Binding Esforcos.AreaAcoMaiorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.AreaAcoMaiorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Área de aço B" />
-                <TextBlock Text="{Binding Esforcos.AreaAcoMenorDimensao, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.AreaAcoMenorDimensao, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Cisalhante Resistente" />
-                <TextBlock Text="{Binding Esforcos.CisalhanteResistente, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.CisalhanteResistente, StringFormat={}{0:0.000}}" />
                 <TextBlock Text="Cisalhante Atuante" />
-                <TextBlock Text="{Binding Esforcos.CisalhanteAtuante, StringFormat={}{0:0.000}}" />
+                <TextBlock Text="{Binding Sapata.Esforcos.CisalhanteAtuante, StringFormat={}{0:0.000}}" />
             </StackPanel>
             
             <StackPanel Margin="15,0,0,0">
                 <TextBlock FontSize="25" FontWeight="Bold">Detalhamento</TextBlock>
                 <TextBlock>Comprimento de ancoragem (lb,nec)</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.ComprimentoAncoragem }" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.ComprimentoAncoragem }" />
                 <TextBlock>Comprimento do aço maior lado</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.ComprimentoAcoMaiorLado}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.ComprimentoAcoMaiorLado}" />
                 <TextBlock>Comprimento do aço menor lado</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.ComprimentoAcoMenorLado}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.ComprimentoAcoMenorLado}" />
                 <TextBlock>Dobra</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.Dobra}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.Dobra}" />
                 <TextBlock>Comprimento total do aço maior lado</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.ComprimentoTotalMaiorDimensao}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.ComprimentoTotalMaiorDimensao}" />
                 <TextBlock>Comprimento total do aço menor lado</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.ComprimentoTotalMenorDimensao}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.ComprimentoTotalMenorDimensao}" />
                 <TextBlock>Comprimento gancho inclinado</TextBlock>
-                <TextBlock Text="{Binding Detalhamento.DobraInclinada}" />
+                <TextBlock Text="{Binding Sapata.Detalhamento.DobraInclinada}" />
 
             </StackPanel>
         </StackPanel>
