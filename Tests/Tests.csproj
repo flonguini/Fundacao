@@ -54,6 +54,10 @@
       <Project>{88f3d862-23f3-470f-98c3-cd3b2366e8b7}</Project>
       <Name>Fundacao</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SapataLibrary\SapataLibrary.csproj">
+      <Project>{4bf1a6e6-e402-4eb3-8d2d-7734695f6c95}</Project>
+      <Name>SapataLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteelLibrary\SteelLibrary.csproj">
       <Project>{9c500c10-5ff5-4d5a-afb4-c81e5a8713cb}</Project>
       <Name>SteelLibrary</Name>

@@ -5,16 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fundacao.Models
+namespace SapataLibrary
 {
     public class DetalhamentoModel : GeometriaModel
     {
         #region Constructor
 
-        public DetalhamentoModel(DadosEntradaModel dados) : base(dados)
-        {
-
-        }
+        /// <summary>
+        /// Construtor padrão da classe
+        /// </summary>
+        /// <param name="dados"></param>
+        public DetalhamentoModel(DadosEntradaModel dados) : base(dados) { }
 
         #endregion
 

@@ -1,4 +1,5 @@
-﻿using Fundacao.Views;
+﻿using Autofac;
+using Fundacao.Views;
 using System.Windows;
 
 namespace Fundacao
@@ -12,6 +13,7 @@ namespace Fundacao
         {
             InitializeComponent();
             MainContentControl.Content = new SapataIsoladaView();
+
         }
     }
 }

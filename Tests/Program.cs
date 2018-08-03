@@ -32,6 +32,7 @@ namespace Tests
             Console.WriteLine($"Pilar Maior lado:{dados.PilarMaiorLado}\nPilar Menor lado:{dados.PilarMenorLado}\nTensao Normal: {dados.TensaoNormal}" +
                 $"\nTensao Adm Solo:{dados.TensaoAdmSolo}");
             Console.ReadKey();
+
         }
     }
 

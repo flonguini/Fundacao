@@ -1,16 +1,23 @@
 ﻿using Fundacao.Models;
 using Fundacao.ViewModels.Commands;
+using SapataLibrary;
 
 namespace Fundacao.ViewModels
 {
-    public class SapataViewModel : ModelBase
+    public class SapataViewModel : ViewModelBase
     {
+        #region Private fields
+
         private SapataModel _sapata;
         private DadosEntradaModel _dadosEntrada = new DadosEntradaModel();
         private double _pilarMenorLado;
         private double _pilarMaiorLado;
         private double _tensaoAdmissivelSolo;
         private double _tensaoNormal;
+
+        #endregion
+
+        #region Public properties
 
         public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
 
@@ -75,6 +82,10 @@ namespace Fundacao.ViewModels
             }
         }
 
+        #endregion
+
+        #region Constructor
+
         public SapataViewModel()
         {
             _dadosEntrada.TensaoAdmSolo = TensaoAdmSolo;
@@ -87,6 +98,10 @@ namespace Fundacao.ViewModels
             DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
 
+        #endregion
+
+        #region Private Methods
+
         public void DimensionarSapata()
         {
             Sapata.DadosEntrada.TensaoAdmSolo = (TensaoAdmSolo/10000);
@@ -96,6 +111,8 @@ namespace Fundacao.ViewModels
 
             Sapata = new SapataModel(Sapata.DadosEntrada);
         }
+
+        #endregion
     }
 }
 

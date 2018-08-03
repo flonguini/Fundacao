@@ -1,9 +1,9 @@
 ﻿using SteelLibrary;
 using System;
 
-namespace Fundacao.Models
+namespace SapataLibrary
 {
-    public class DadosEntradaModel : ModelBase
+    public class DadosEntradaModel
     {
         #region Private fields
 
@@ -31,7 +31,6 @@ namespace Fundacao.Models
             set
             {
                 _pilarMenorLado = value;
-                OnPropertyChanged();
             }
         }
 
@@ -44,7 +43,6 @@ namespace Fundacao.Models
             set
             {
                 _pilarMaiorLado = value;
-                OnPropertyChanged();
             }
         }
 
@@ -57,7 +55,6 @@ namespace Fundacao.Models
             set
             {
                 _tensaoAdmSolo = value;
-                OnPropertyChanged();
             }
         }
 
@@ -70,7 +67,6 @@ namespace Fundacao.Models
             set
             {
                 _tensaoNormal = value;
-                OnPropertyChanged();
             }
         }
 

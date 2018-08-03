@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Fundacao.Models
+namespace SapataLibrary
 {
     public class GeometriaModel
     {

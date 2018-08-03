@@ -34,6 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.8.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.8.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -54,11 +57,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\DetalhamentoModel.cs" />
-    <Compile Include="Models\EsforcosModel.cs" />
-    <Compile Include="Models\GeometriaModel.cs" />
-    <Compile Include="Models\ModelBase.cs" />
-    <Compile Include="Models\SapataModel.cs" />
+    <Compile Include="ContainerConfig.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="ViewModels\Commands\DimensionarSapataCommand.cs" />
     <Compile Include="ViewModels\Converters\ValueConverter.cs" />
     <Compile Include="ViewModels\SapataViewModel.cs" />
@@ -83,7 +83,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DadosEntradaModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -101,6 +100,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -110,10 +110,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SapataLibrary\SapataLibrary.csproj">
+      <Project>{4bf1a6e6-e402-4eb3-8d2d-7734695f6c95}</Project>
+      <Name>SapataLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SteelLibrary\SteelLibrary.csproj">
       <Project>{9c500c10-5ff5-4d5a-afb4-c81e5a8713cb}</Project>
       <Name>SteelLibrary</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

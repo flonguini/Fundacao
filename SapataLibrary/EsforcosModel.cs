@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Fundacao.Models
+namespace SapataLibrary
 {
-    public class EsforcosModel
+    public class EsforcosModel 
     {
         #region Private fields
 

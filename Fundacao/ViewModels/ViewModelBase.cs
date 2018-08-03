@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Fundacao.Models
 {
-    public class ModelBase : INotifyPropertyChanged
+    public class ViewModelBase : INotifyPropertyChanged
     {
         /// <summary>
         /// Evento que é acionado quando há uma alteração de propriedade
