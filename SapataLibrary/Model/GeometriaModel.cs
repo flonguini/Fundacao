@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace SapataLibrary
+namespace SapataLibrary.Model
 {
-    public class GeometriaModel
+    public class GeometriaModel : IGeometriaModel
     {
         #region Private Fields
 
-        private readonly DadosEntradaModel _dados;
+        private readonly IDadosEntradaModel _dados;
 
         #endregion
 
@@ -16,7 +16,7 @@ namespace SapataLibrary
         /// Construtor padrão da classe Geometria
         /// </summary>
         /// <param name="dados">Parâmetros de entrada da classe EntradaDadosModel</param>
-        public GeometriaModel(DadosEntradaModel dados)
+        public GeometriaModel(IDadosEntradaModel dados)
         {
             _dados = dados;
         }

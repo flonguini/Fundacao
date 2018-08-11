@@ -1,9 +1,9 @@
 ﻿using SteelLibrary;
 using System;
 
-namespace SapataLibrary
+namespace SapataLibrary.Model
 {
-    public class DadosEntradaModel
+    public class DadosEntradaModel : IDadosEntradaModel
     {
         #region Private fields
 

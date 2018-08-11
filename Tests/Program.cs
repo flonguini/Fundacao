@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Fundacao.Models;
 using SteelLibrary;
+using SapataLibrary.Model;
 
 namespace Tests
 {
@@ -20,18 +21,6 @@ namespace Tests
             //{
             //    Console.WriteLine("{0}", prop.Name);
             //}
-
-            DadosEntradaModel dados = new DadosEntradaModel
-            {
-                PilarMaiorLado = 80,
-                PilarMenorLado = 20,
-                TensaoNormal = 1250,
-                TensaoAdmSolo = 260
-            };
-
-            Console.WriteLine($"Pilar Maior lado:{dados.PilarMaiorLado}\nPilar Menor lado:{dados.PilarMenorLado}\nTensao Normal: {dados.TensaoNormal}" +
-                $"\nTensao Adm Solo:{dados.TensaoAdmSolo}");
-            Console.ReadKey();
 
         }
     }

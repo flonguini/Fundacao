@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SapataLibrary
+namespace SapataLibrary.Model
 {
     public class DetalhamentoModel : GeometriaModel
     {

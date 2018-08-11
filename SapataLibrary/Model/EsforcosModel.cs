@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace SapataLibrary
+namespace SapataLibrary.Model
 {
     public class EsforcosModel 
     {

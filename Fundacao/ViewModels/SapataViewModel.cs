@@ -1,15 +1,17 @@
-﻿using Fundacao.Models;
+﻿using Autofac;
+using Fundacao.Models;
+using Fundacao.Startup;
 using Fundacao.ViewModels.Commands;
-using SapataLibrary;
+using SapataLibrary.Model;
 
 namespace Fundacao.ViewModels
 {
-    public class SapataViewModel : ViewModelBase
+    public class SapataViewModel : ViewModelBase, ISapataViewModel
     {
         #region Private fields
 
-        private SapataModel _sapata;
-        private DadosEntradaModel _dadosEntrada = new DadosEntradaModel();
+        private ISapataModel _sapata;
+        private readonly IDadosEntradaModel _dadosEntrada;
         private double _pilarMenorLado;
         private double _pilarMaiorLado;
         private double _tensaoAdmissivelSolo;
@@ -21,7 +23,7 @@ namespace Fundacao.ViewModels
 
         public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
 
-        public SapataModel Sapata
+        public ISapataModel Sapata
         {
             get { return _sapata; }
             set
@@ -86,15 +88,19 @@ namespace Fundacao.ViewModels
 
         #region Constructor
 
+        /// <summary>
+        /// Construtor padrão da classe
+        /// </summary>
         public SapataViewModel()
         {
-            _dadosEntrada.TensaoAdmSolo = TensaoAdmSolo;
-            _dadosEntrada.TensaoNormal = TensaoNormal;
+            _dadosEntrada = Bootstrapper.Resolve<IDadosEntradaModel>();
             _dadosEntrada.PilarMaiorLado = PilarMaiorLado;
             _dadosEntrada.PilarMenorLado = PilarMenorLado;
+            _dadosEntrada.TensaoAdmSolo = TensaoAdmSolo;
+            _dadosEntrada.TensaoNormal = TensaoNormal;
 
-            Sapata = new SapataModel(_dadosEntrada);
-           
+            Sapata = Bootstrapper.Resolve<ISapataModel>();
+
             DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
 
@@ -102,14 +108,21 @@ namespace Fundacao.ViewModels
 
         #region Private Methods
 
+        /// <summary>
+        /// Dimensiona as dimensões, esforços e detalhamento da sapata
+        /// </summary>
         public void DimensionarSapata()
         {
-            Sapata.DadosEntrada.TensaoAdmSolo = (TensaoAdmSolo/10000);
+
+            Sapata.DadosEntrada.TensaoAdmSolo = (TensaoAdmSolo / 10000);
             Sapata.DadosEntrada.TensaoNormal = TensaoNormal;
             Sapata.DadosEntrada.PilarMaiorLado = PilarMaiorLado;
             Sapata.DadosEntrada.PilarMenorLado = PilarMenorLado;
 
             Sapata = new SapataModel(Sapata.DadosEntrada);
+
+
+            //Sapata = Bootstrapper.Resolve<ISapataModel>();
         }
 
         #endregion
