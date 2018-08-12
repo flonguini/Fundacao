@@ -11,17 +11,17 @@ namespace Fundacao.ViewModels
         #region Private fields
 
         private ISapataModel _sapata;
-        private readonly IDadosEntradaModel _dadosEntrada;
+        private IDadosEntradaModel _dadosEntrada;
         private double _pilarMenorLado;
         private double _pilarMaiorLado;
         private double _tensaoAdmissivelSolo;
         private double _tensaoNormal;
 
         #endregion
-
-        #region Public properties
-
+                
         public DimensionarSapataCommand DimensionarSapataCommand { get; set; }
+
+        #region Public Properties
 
         public ISapataModel Sapata
         {
@@ -93,13 +93,9 @@ namespace Fundacao.ViewModels
         /// </summary>
         public SapataViewModel()
         {
-            _dadosEntrada = Bootstrapper.Resolve<IDadosEntradaModel>();
-            _dadosEntrada.PilarMaiorLado = PilarMaiorLado;
-            _dadosEntrada.PilarMenorLado = PilarMenorLado;
-            _dadosEntrada.TensaoAdmSolo = TensaoAdmSolo;
-            _dadosEntrada.TensaoNormal = TensaoNormal;
-
             Sapata = Bootstrapper.Resolve<ISapataModel>();
+
+            _dadosEntrada = Bootstrapper.Resolve<IDadosEntradaModel>();
 
             DimensionarSapataCommand = new DimensionarSapataCommand(this);
         }
@@ -114,15 +110,13 @@ namespace Fundacao.ViewModels
         public void DimensionarSapata()
         {
 
-            Sapata.DadosEntrada.TensaoAdmSolo = (TensaoAdmSolo / 10000);
-            Sapata.DadosEntrada.TensaoNormal = TensaoNormal;
-            Sapata.DadosEntrada.PilarMaiorLado = PilarMaiorLado;
-            Sapata.DadosEntrada.PilarMenorLado = PilarMenorLado;
+            _dadosEntrada.TensaoAdmSolo = (TensaoAdmSolo / 10000);
+            _dadosEntrada.TensaoNormal = TensaoNormal;
+            _dadosEntrada.PilarMaiorLado = PilarMaiorLado;
+            _dadosEntrada.PilarMenorLado = PilarMenorLado;
 
-            Sapata = new SapataModel(Sapata.DadosEntrada);
-
-
-            //Sapata = Bootstrapper.Resolve<ISapataModel>();
+            Sapata = new SapataModel(_dadosEntrada);
+            //Sapata = Bootstrapper.Resolve<ISapataModel>(new NamedParameter("dados", Sapata.DadosEntrada));
         }
 
         #endregion

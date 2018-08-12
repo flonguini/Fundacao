@@ -42,7 +42,7 @@ namespace SapataLibrary.Model
         /// </summary>
         public IGeometriaModel Geometria
         {
-            get { return DimensionarGeometria(); }
+            get { return new GeometriaModel(_dados); }
             set { _geometria = value; }
         }
 
@@ -66,10 +66,5 @@ namespace SapataLibrary.Model
         //}
 
         #endregion
-
-        private IGeometriaModel DimensionarGeometria()
-        {
-            return new GeometriaModel(_dados);
-        }
     }
 }

@@ -33,8 +33,7 @@ namespace Fundacao.Startup
 
             builder.RegisterType<MainWindow>().AsSelf();
             builder.RegisterType<GeometriaModel>().As<IGeometriaModel>();
-            //builder.RegisterType<SapataModel>().As<ISapataModel>();
-            builder.RegisterType<SapataModel>().As<ISapataModel>().WithParameter(new TypedParameter(typeof(DadosEntradaModel), null));
+            builder.RegisterType<SapataModel>().As<ISapataModel>();
             builder.RegisterType<DadosEntradaModel>().As<IDadosEntradaModel>();
             builder.RegisterType<SapataViewModel>().As<ISapataViewModel>();
 
